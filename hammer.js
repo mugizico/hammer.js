@@ -97,10 +97,6 @@ function Hammer(element, options, undefined)
     // keep track of the mouse status
     var _mousedown = false;
 
-    var _event_start;
-    var _event_move;
-    var _event_end;
-
     var _has_touch = ('ontouchstart' in window);
 
     var _can_tap = false;
@@ -598,7 +594,6 @@ function Hammer(element, options, undefined)
                     _setup();
                 }
 
-                _event_move = event;
                 _pos.move = getXYfromEvent(event);
 
                 if(!gestures.transform(event)) {
@@ -613,7 +608,6 @@ function Hammer(element, options, undefined)
                 var callReset = true;
 
                 _mousedown = false;
-                _event_end = event;
 
                 // swipe gesture
                 gestures.swipe(event);
@@ -655,7 +649,7 @@ function Hammer(element, options, undefined)
                         callReset = false;
                     }
                 } else if (_can_tap) {
-                    gestures.tap(_event_start);
+                    gestures.tap(event);
                 }
 
                 _prev_gesture = _gesture;
